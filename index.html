@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Market Articles & Insights - Invest-With-Me</title>
+    <link rel="stylesheet" href="articles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-chart-line"></i>
+                Invest-With-Me
+            </a>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#articles" class="nav-link">Articles</a></li>
+                <li><a href="#categories" class="nav-link">Categories</a></li>
+                <li><a href="#trending" class="nav-link">Trending</a></li>
+                <li><a href="#nepse" class="nav-link">NEPSE Updates</a></li>
+                <li><a href="#newsletter" class="nav-link">Newsletter</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="search-toggle" onclick="toggleSearch()">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Search Overlay -->
+        <div class="search-overlay" id="searchOverlay">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search articles, topics, NEPSE stocks..." id="searchInput">
+                <button class="search-close" onclick="toggleSearch()">×</button>
+                <div class="search-results" id="searchResults"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-fire"></i>
+                Latest Market Updates
+            </div>
+            <h1 class="hero-title">
+                Master the <span class="highlight">Share Market</span> with Expert Insights
+            </h1>
+            <p class="hero-subtitle">
+                Comprehensive articles, analysis, and updates on NEPSE and secondary share market. 
+                Stay informed with daily market news, technical analysis, and investment strategies.
+            </p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Articles Published</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="stat-number">50K+</span>
+                    <span class="stat-label">Monthly Readers</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="stat-number">1000+</span>
+                    <span class="stat-label">NEPSE Analyses</span>
+                </div>
+            </div>
+            <div class="hero-actions">
+                <button class="btn-primary" onclick="scrollToArticles()">
+                    <i class="fas fa-book-open"></i>
+                    Browse Articles
+                </button>
+                <button class="btn-secondary" onclick="openNewsletter()">
+                    <i class="fas fa-envelope"></i>
+                    Subscribe for Updates
+                </button>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600" alt="Stock Market Analysis">
+            <div class="floating-card card-1">
+                <i class="fas fa-arrow-up text-green"></i>
+                <span>NEPSE +45.67</span>
+            </div>
+            <div class="floating-card card-2">
+                <i class="fas fa-chart-line"></i>
+                <span>Market Trend: Bullish</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Categories -->
+    <section class="categories" id="categories">
+        <div class="section-header">
+            <span class="section-badge">Browse Topics</span>
+            <h2 class="section-title">Article Categories</h2>
+            <p class="section-subtitle">Find articles tailored to your investment interests</p>
+        </div>
+        
+        <div class="categories-grid">
+            <div class="category-card active" onclick="filterArticles('all')">
+                <i class="fas fa-globe"></i>
+                <h3>All Articles</h3>
+                <span class="article-count">524 articles</span>
+            </div>
+            <div class="category-card" onclick="filterArticles('nepse')">
+                <i class="fas fa-building-columns"></i>
+                <h3>NEPSE Updates</h3>
+                <span class="article-count">156 articles</span>
+            </div>
+            <div class="category-card" onclick="filterArticles('technical')">
+                <i class="fas fa-chart-bar"></i>
+                <h3>Technical Analysis</h3>
+                <span class="article-count">98 articles</span>
+            </div>
+            <div class="category-card" onclick="filterArticles('fundamental')">
+                <i class="fas fa-calculator"></i>
+                <h3>Fundamental Analysis</h3>
+                <span class="article-count">87 articles</span>
+            </div>
+            <div class="category-card" onclick="filterArticles('ipo')">
+                <i class="fas fa-rocket"></i>
+                <h3>IPO & Auctions</h3>
+                <span class="article-count">64 articles</span>
+            </div>
+            <div class="category-card" onclick="filterArticles('strategy')">
+                <i class="fas fa-chess"></i>
+                <h3>Investment Strategies</h3>
+                <span class="article-count">119 articles</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Articles Section -->
+    <section class="articles-section" id="articles">
+        <div class="section-header">
+            <span class="section-badge">Latest Insights</span>
+            <h2 class="section-title">Recent Articles</h2>
+            <div class="articles-controls">
+                <div class="sort-dropdown">
+                    <select onchange="sortArticles(this.value)">
+                        <option value="latest">Latest First</option>
+                        <option value="oldest">Oldest First</option>
+                        <option value="popular">Most Popular</option>
+                        <option value="trending">Trending</option>
+                    </select>
+                </div>
+                <div class="view-toggle">
+                    <button class="view-btn active" onclick="changeView('grid')">
+                        <i class="fas fa-th-large"></i>
+                    </button>
+                    <button class="view-btn" onclick="changeView('list')">
+                        <i class="fas fa-list"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Articles Grid -->
+        <div class="articles-grid" id="articlesGrid">
+            <!-- Article Card 1 -->
+            <article class="article-card" data-category="nepse" data-date="2024-01-15">
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f193?w=400" alt="NEPSE Analysis">
+                    <span class="article-category">NEPSE Updates</span>
+                    <button class="bookmark-btn" onclick="toggleBookmark(this)">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span class="article-date">
+                            <i class="far fa-calendar"></i> Jan 15, 2024
+                        </span>
+                        <span class="article-read-time">
+                            <i class="far fa-clock"></i> 8 min read
+                        </span>
+                    </div>
+                    <h3 class="article-title">
+                        <a href="#">NEPSE Index Surges 45 Points: What's Driving the Bull Run?</a>
+                    </h3>
+                    <p class="article-excerpt">
+                        The Nepal Stock Exchange (NEPSE) index witnessed a significant surge of 45.67 points today, 
+                        driven by banking and hydropower sectors. Here's a detailed analysis...
+                    </p>
+                    <div class="article-footer">
+                        <div class="article-author">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50" alt="Author">
+                            <div>
+                                <span class="author-name">Rajesh Hamal</span>
+                                <span class="author-role">Senior Analyst</span>
+                            </div>
+                        </div>
+                        <div class="article-stats">
+                            <span><i class="far fa-eye"></i> 2.5K</span>
+                            <span><i class="far fa-comment"></i> 45</span>
+                            <span><i class="far fa-heart"></i> 128</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article Card 2 -->
+            <article class="article-card" data-category="technical" data-date="2024-01-14">
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1535320903710-d993d3d77d29?w=400" alt="Technical Analysis">
+                    <span class="article-category">Technical Analysis</span>
+                    <button class="bookmark-btn" onclick="toggleBookmark(this)">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span class="article-date">
+                            <i class="far fa-calendar"></i> Jan 14, 2024
+                        </span>
+                        <span class="article-read-time">
+                            <i class="far fa-clock"></i> 12 min read
+                        </span>
+                    </div>
+                    <h3 class="article-title">
+                        <a href="#">Candlestick Patterns Every NEPSE Trader Must Know in 2024</a>
+                    </h3>
+                    <p class="article-excerpt">
+                        Master the art of reading candlestick patterns specific to NEPSE listed stocks. 
+                        From Doji to Hammer, learn how to predict market movements accurately...
+                    </p>
+                    <div class="article-footer">
+                        <div class="article-author">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50" alt="Author">
+                            <div>
+                                <span class="author-name">Sita Sharma</span>
+                                <span class="author-role">Technical Analyst</span>
+                            </div>
+                        </div>
+                        <div class="article-stats">
+                            <span><i class="far fa-eye"></i> 3.8K</span>
+                            <span><i class="far fa-comment"></i> 67</span>
+                            <span><i class="far fa-heart"></i> 245</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article Card 3 -->
+            <article class="article-card featured" data-category="ipo" data-date="2024-01-13">
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1559526324-4b87b5e9e6b7?w=400" alt="IPO News">
+                    <span class="article-category">IPO & Auctions</span>
+                    <span class="featured-badge">Featured</span>
+                    <button class="bookmark-btn" onclick="toggleBookmark(this)">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span class="article-date">
+                            <i class="far fa-calendar"></i> Jan 13, 2024
+                        </span>
+                        <span class="article-read-time">
+                            <i class="far fa-clock"></i> 6 min read
+                        </span>
+                    </div>
+                    <h3 class="article-title">
+                        <a href="#">Upcoming IPOs in Nepal 2024: Complete List & Analysis</a>
+                    </h3>
+                    <p class="article-excerpt">
+                        Comprehensive guide to all upcoming IPOs in Nepal for 2024. Including issue prices, 
+                        company fundamentals, and expert recommendations for investors...
+                    </p>
+                    <div class="article-footer">
+                        <div class="article-author">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=50" alt="Author">
+                            <div>
+                                <span class="author-name">Anita Gurung</span>
+                                <span class="author-role">IPO Specialist</span>
+                            </div>
+                        </div>
+                        <div class="article-stats">
+                            <span><i class="far fa-eye"></i> 5.2K</span>
+                            <span><i class="far fa-comment"></i> 89</span>
+                            <span><i class="far fa-heart"></i> 367</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article Card 4 -->
+            <article class="article-card" data-category="fundamental" data-date="2024-01-12">
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400" alt="Fundamental Analysis">
+                    <span class="article-category">Fundamental Analysis</span>
+                    <button class="bookmark-btn" onclick="toggleBookmark(this)">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span class="article-date">
+                            <i class="far fa-calendar"></i> Jan 12, 2024
+                        </span>
+                        <span class="article-read-time">
+                            <i class="far fa-clock"></i> 10 min read
+                        </span>
+                    </div>
+                    <h3 class="article-title">
+                        <a href="#">How to Analyze NEPSE Listed Companies: Fundamental Analysis Guide</a>
+                    </h3>
+                    <p class="article-excerpt">
+                        Step-by-step guide to fundamental analysis of NEPSE listed companies. Learn about 
+                        P/E ratios, book value, dividend yield, and more key metrics...
+                    </p>
+                    <div class="article-footer">
+                        <div class="article-author">
+                            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=50" alt="Author">
+                            <div>
+                                <span class="author-name">Binod Thapa</span>
+                                <span class="author-role">Research Analyst</span>
+                            </div>
+                        </div>
+                        <div class="article-stats">
+                            <span><i class="far fa-eye"></i> 1.9K</span>
+                            <span><i class="far fa-comment"></i> 34</span>
+                            <span><i class="far fa-heart"></i> 156</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article Card 5 -->
+            <article class="article-card" data-category="strategy" data-date="2024-01-11">
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=400" alt="Investment Strategy">
+                    <span class="article-category">Investment Strategies</span>
+                    <button class="bookmark-btn" onclick="toggleBookmark(this)">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span class="article-date">
+                            <i class="far fa-calendar"></i> Jan 11, 2024
+                        </span>
+                        <span class="article-read-time">
+                            <i class="far fa-clock"></i> 15 min read
+                        </span>
+                    </div>
+                    <h3 class="article-title">
+                        <a href="#">Top 10 Investment Strategies for Nepali Share Market Beginners</a>
+                    </h3>
+                    <p class="article-excerpt">
+                        Discover proven investment strategies tailored for the Nepali share market. 
+                        From SIP to value investing, find the right approach for your goals...
+                    </p>
+                    <div class="article-footer">
+                        <div class="article-author">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=50" alt="Author">
+                            <div>
+                                <span class="author-name">Prakash Adhikari</span>
+                                <span class="author-role">Investment Advisor</span>
+                            </div>
+                        </div>
+                        <div class="article-stats">
+                            <span><i class="far fa-eye"></i> 4.1K</span>
+                            <span><i class="far fa-comment"></i> 72</span>
+                            <span><i class="far fa-heart"></i> 298</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article Card 6 -->
+            <article class="article-card" data-category="nepse" data-date="2024-01-10">
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400" alt="Market Analysis">
+                    <span class="article-category">NEPSE Updates</span>
+                    <button class="bookmark-btn" onclick="toggleBookmark(this)">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span class="article-date">
+                            <i class="far fa-calendar"></i> Jan 10, 2024
+                        </span>
+                        <span class="article-read-time">
+                            <i class="far fa-clock"></i> 7 min read
+                        </span>
+                    </div>
+                    <h3 class="article-title">
+                        <a href="#">Weekly Market Wrap: NEPSE Performance & Top Gainers/Losers</a>
+                    </h3>
+                    <p class="article-excerpt">
+                        Complete weekly analysis of NEPSE performance, sector-wise breakdown, 
+                        top gainers and losers, and market outlook for the upcoming week...
+                    </p>
+                    <div class="article-footer">
+                        <div class="article-author">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50" alt="Author">
+                            <div>
+                                <span class="author-name">Rajesh Hamal</span>
+                                <span class="author-role">Senior Analyst</span>
+                            </div>
+                        </div>
+                        <div class="article-stats">
+                            <span><i class="far fa-eye"></i> 2.8K</span>
+                            <span><i class="far fa-comment"></i> 51</span>
+                            <span><i class="far fa-heart"></i> 189</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- Load More Button -->
+        <div class="load-more-container">
+            <button class="load-more-btn" onclick="loadMoreArticles()">
+                <i class="fas fa-spinner"></i>
+                Load More Articles
+            </button>
+        </div>
+    </section>
+
+    <!-- Trending Section -->
+    <section class="trending-section" id="trending">
+        <div class="section-header">
+            <span class="section-badge">Popular Now</span>
+            <h2 class="section-title">Trending Articles</h2>
+        </div>
+        <div class="trending-grid">
+            <div class="trending-card">
+                <span class="trend-number">01</span>
+                <div class="trend-content">
+                    <span class="trend-category">NEPSE</span>
+                    <h4><a href="#">NEPSE Introduces New Online Trading System</a></h4>
+                    <div class="trend-stats">
+                        <span><i class="fas fa-eye"></i> 12.5K views</span>
+                        <span><i class="fas fa-share"></i> 2.3K shares</span>
+                    </div>
+                </div>
+            </div>
+            <div class="trending-card">
+                <span class="trend-number">02</span>
+                <div class="trend-content">
+                    <span class="trend-category">IPO</span>
+                    <h4><a href="#">Mega Bank IPO Oversubscribed by 500%</a></h4>
+                    <div class="trend-stats">
+                        <span><i class="fas fa-eye"></i> 10.2K views</span>
+                        <span><i class="fas fa-share"></i> 1.8K shares</span>
+                    </div>
+                </div>
+            </div>
+            <div class="trending-card">
+                <span class="trend-number">03</span>
+                <div class="trend-content">
+                    <span class="trend-category">Analysis</span>
+                    <h4><a href="#">Hydro Sector Stocks: Buy or Sell in 2024?</a></h4>
+                    <div class="trend-stats">
+                        <span><i class="fas fa-eye"></i> 8.9K views</span>
+                        <span><i class="fas fa-share"></i> 1.5K shares</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEPSE Live Section -->
+    <section class="nepse-section" id="nepse">
+        <div class="section-header">
+            <span class="section-badge">Live Market</span>
+            <h2 class="section-title">NEPSE Live Updates</h2>
+        </div>
+        <div class="nepse-widget">
+            <div class="nepse-header">
+                <div class="nepse-index">
+                    <h3>NEPSE Index</h3>
+                    <span class="index-value">2,145.67</span>
+                    <span class="index-change positive">+45.67 (2.18%)</span>
+                </div>
+                <div class="market-status open">
+                    <span class="status-dot"></span>
+                    Market Open
+                </div>
+            </div>
+            <div class="nepse-details">
+                <div class="detail-item">
+                    <span class="detail-label">Turnover</span>
+                    <span class="detail-value">Rs. 4.2 Arba</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Volume</span>
+                    <span class="detail-value">12,45,678</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Gainers</span>
+                    <span class="detail-value positive">142</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Losers</span>
+                    <span class="detail-value negative">68</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section" id="newsletter">
+        <div class="newsletter-container">
+            <div class="newsletter-content">
+                <i class="fas fa-paper-plane newsletter-icon"></i>
+                <h2>Stay Updated with Share Market Insights</h2>
+                <p>Get weekly articles, NEPSE updates, and investment tips delivered to your inbox</p>
+                <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" placeholder="Enter your email address" required>
+                        <button type="submit">Subscribe Now</button>
+                    </div>
+                </form>
+                <div class="newsletter-features">
+                    <span><i class="fas fa-check-circle"></i> Weekly Articles</span>
+                    <span><i class="fas fa-check-circle"></i> NEPSE Alerts</span>
+                    <span><i class="fas fa-check-circle"></i> No Spam</span>
+                    <span><i class="fas fa-check-circle"></i> Free Access</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3><i class="fas fa-chart-line"></i> Invest-With-Me</h3>
+                <p>Your trusted source for share market articles, NEPSE updates, and investment insights in Nepal.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#articles">Latest Articles</a></li>
+                    <li><a href="#categories">Categories</a></li>
+                    <li><a href="#trending">Trending</a></li>
+                    <li><a href="#nepse">NEPSE Updates</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Categories</h4>
+                <ul>
+                    <li><a href="#">NEPSE Analysis</a></li>
+                    <li><a href="#">Technical Analysis</a></li>
+                    <li><a href="#">IPO News</a></li>
+                    <li><a href="#">Investment Tips</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i> Kathmandu, Nepal</li>
+                    <li><i class="fas fa-envelope"></i> info@investwithme.com</li>
+                    <li><i class="fas fa-phone"></i> +977-1-4XXXXXX</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Invest-With-Me. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="articles.js"></script>
+</body>
+</html>
